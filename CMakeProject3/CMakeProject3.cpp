@@ -17,7 +17,7 @@ std::string set_data(std::map<std::string, std::string>& data_map) {
 }
 
 void make_request(std::map<std::string, std::string>& data_map, std::string type_of_request) {
-	cpr::Response r;
+	;
 	std::string data;
 	std::map<std::string, std::string>::iterator it;
 
@@ -26,8 +26,8 @@ void make_request(std::map<std::string, std::string>& data_map, std::string type
 	}
 	data.erase(0, 1);
 	
-	(type_of_request == "get") ? r = cpr::Get(cpr::Url("https://httpbin.org/get" + ("?" + data))) :
-								 r = cpr::Post(cpr::Url("https://httpbin.org/post"), data.c_str());
+	cpr::Response r = (type_of_request == "get") ? cpr::Get(cpr::Url("https://httpbin.org/get" + ("?" + data))) :
+												   cpr::Post(cpr::Url("https://httpbin.org/post"), cpr::Body(data));
 
 	std::cout << r.text << std::endl;
 }
